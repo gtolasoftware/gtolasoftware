@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"> 
+  </head>
+  <body onload="GTOLA()">
+    <script>
+    function GTOLA() {
+      if (window.opener && typeof window.opener.authorize === 'function') {
+        let authorize = window.opener.authorize;
+        authorize(window.location.hash.substring(7));
+      }
+      window.close();
+    }
+    </script>
+  </body>
+</html>

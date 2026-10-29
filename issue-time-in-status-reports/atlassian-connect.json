@@ -1,0 +1,33 @@
+{
+   "name": "Issue Time in Status Reports",
+   "description": "Creates custom fields that measure the time each issue spent on a status.",
+   "key": "com.gtola.issue-time-in-status-reports",
+   "baseUrl": "https://www.gtola.com",
+   "vendor": {
+       "name": "GTola",
+       "url": "https://www.gtola.com"
+   },
+   "authentication": {
+       "type": "none"
+   },
+   "lifecycle": {
+       "installed": "/.netlify/functions/install"
+   },
+   "version": "1.1",
+   "scopes": [ "ADMIN" ],
+   "enableLicensing": false,
+   "apiVersion": 1,
+   "links": {
+     "self": "https://www.gtola.com/issue-time-in-status-reports/atlassian-connect.json",
+     "documentation": "https://www.gtola.com/issue-time-in-status-reports/docs.html"
+   },
+   "modules": {
+      "configurePage": {
+        "url": "/issue-time-in-status-reports/config.html",
+        "name": {
+          "value": "Issue Time in Status Reports Configuration Page"
+        },
+        "key": "issue-time-in-status-reports-config-page"
+      }
+   }
+}

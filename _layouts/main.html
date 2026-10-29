@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-PCCBB3S8');</script>
+<!-- End Google Tag Manager -->
+
+<meta charset="UTF-8">
+<title>{{ page.title | default: site.title }}</title>
+<meta name="description" content="{{ page.desc | default: site.description }}">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" type="image/x-icon" href="{{site.baseurl}}/assets/favicon.ico">
+<style>
+@media (min-width:519px) {
+  #container {  max-width:700px; }
+  .floatLeft50 { max-width:350px; }
+  .floatLeft33 { max-width:233px; }
+  input,textarea { width: 480px; }
+}
+@media (min-width:1038px) {
+  #container {  max-width:1024px; }
+  .floatLeft50 {  max-width:512px; }
+  .floatLeft33 { max-width:341px; }
+  input,textarea { width: 480px; }
+}
+@media (max-width:696px) {
+  #container {  max-width:341px; }
+  .floatLeft50 {  max-width:170px; }
+  .floatLeft33 { max-width:113px; }
+  input,textarea { width: 315px; }
+}
+.floatLeft50 { float:left; min-width:340px; margin-top:10px; }
+.floatLeft33 { float:left; min-width:340px; margin-top:10px;  }
+.floatRight50 { float:right; }
+.floatRight33 { float:right; }
+.clear { clear: both; }
+.spacer25 { display:block; width:0px; height:25px; }
+.spacer10 { display:block; width:0px; height:10px; }
+body { color: #111111;  font-family: ui-sans-serif,system-ui,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color emoji; }
+h1, h2, h3, h4, h5, h6 {  font-family: ui-sans-serif,system-ui,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color emoji; }
+h1 { font-size: 3rem;}
+h2 { font-size: 1.1em;font-weight: normal;color: #4c4949; }
+p,code,ul { color: #0000008a; }
+.ptxt { padding: 20px 20px 1px 20px; }
+.holder {position: relative; margin: 10px; min-height: 340px;}
+.pmore { position:absolute; bottom:10px; left:20px;}
+.pmore a { color:grey; font-size: 14px; font-weight: bold; text-decoration:none;}
+.pbg {  border-radius: 25px;border: 1px solid #e3e3e3;position: absolute; width: 100%; height: 100%; z-index: -1;
+ width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: repeat;
+ background-image: url("data:image/svg+xml;utf8,%3Csvg viewBox=%220 0 2000 1000%22 xmlns=%22http:%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cmask id=%22b%22 x=%220%22 y=%220%22 width=%222000%22 height=%221000%22%3E%3Cpath fill=%22url(%23a)%22 d=%22M0 0h2000v1000H0z%22%2F%3E%3C%2Fmask%3E%3Cpath fill=%22%23f9f9f9%22 d=%22M0 0h2000v1000H0z%22%2F%3E%3Cg style=%22transform-origin:center center%22 stroke=%22%23ddd%22 stroke-width=%221.4%22 mask=%22url(%23b)%22%3E%3Cpath fill=%22none%22 d=%22M0 0h200v200H0zM200 0h200v200H200z%22 transform=%22matrix(1.32892 -.55182 -.06813 1.3 0 0)%22%2F%3E%3Cpath fill=%22%23dddddd45%22 d=%22M400 0h200v200H400z%22 transform=%22matrix(1.32892 -.55182 -.06813 1.3 0 0)%22%2F%3E%3Cpath fill=%22%23ddddddb3%22 d=%22M600 0h200v200H600z%22 transform=%22matrix(1.32892 -.55182 -.06813 1.3 0 0)%22%2F%3E%3Cpath fill=%22none%22 d=%22M800 0h200v200H800zM1000 0h200v200h-200zM1200 0h200v200h-200zM1400 0h200v200h-200zM1600 0h200v200h-200z%22 transform=%22matrix(1.32892 -.55182 -.06813 1.3 0 0)%22%2F%3E%3Cpath fill=%22%23dddddd0e%22 d=%22M1800 0h200v200h-200z%22 transform=%22matrix(1.32892 -.55182 -.06813 1.3 0 0)%22%2F%3E%3Cpath fill=%22none%22 d=%22M0 200h200v200H0zM200 200h200v200H200z%22 transform=%22matrix(1.32892 -.55182 -.06813 1.3 0 0)%22%2F%3E%3Cpath fill=%22%23ddddddbe%22 d=%22M400 200h200v200H400z%22 transform=%22matrix(1.32892 -.55182 -.06813 1.3 0 0)%22%2F%3E%3Cpath fill=%22%23dddddd9e%22 d=%22M600 200h200v200H600z%22 transform=%22matrix(1.32892 -.55182 -.06813 1.3 0 0)%22%2F%3E%3Cpath fill=%22none%22 d=%22M800 200h200v200H800zM1000 200h200v200h-200zM1200 200h200v200h-200zM1400 200h200v200h-200zM1600 200h200v200h-200zM1800 200h200v200h-200z%22 transform=%22matrix(1.32892 -.55182 -.06813 1.3 0 0)%22%2F%3E%3Cpath fill=%22%23ddddddf6%22 d=%22M0 400h200v200H0z%22 transform=%22matrix(1.32892 -.55182 -.06813 1.3 0 0)%22%2F%3E%3Cpath fill=%22none%22 d=%22M200 400h200v200H200z%22 transform=%22matrix(1.32892 -.55182 -.06813 1.3 0 0)%22%2F%3E%3Cpath fill=%22%23dddddd34%22 d=%22M400 400h200v200H400z%22 transform=%22matrix(1.32892 -.55182 -.06813 1.3 0 0)%22%2F%3E%3Cpath fill=%22none%22 d=%22M600 400h200v200H600zM800 400h200v200H800zM1000 400h200v200h-200z%22 transform=%22matrix(1.32892 -.55182 -.06813 1.3 0 0)%22%2F%3E%3Cpath fill=%22%23ddddddc9%22 d=%22M1200 400h200v200h-200z%22 transform=%22matrix(1.32892 -.55182 -.06813 1.3 0 0)%22%2F%3E%3Cpath fill=%22none%22 d=%22M1400 400h200v200h-200zM1600 400h200v200h-200zM1800 400h200v200h-200zM0 600h200v200H0zM200 600h200v200H200z%22 transform=%22matrix(1.32892 -.55182 -.06813 1.3 0 0)%22%2F%3E%3Cpath fill=%22%23dddddd0d%22 d=%22M400 600h200v200H400z%22 transform=%22matrix(1.32892 -.55182 -.06813 1.3 0 0)%22%2F%3E%3Cpath fill=%22none%22 d=%22M600 600h200v200H600z%22 transform=%22matrix(1.32892 -.55182 -.06813 1.3 0 0)%22%2F%3E%3Cpath fill=%22%23dddddd8d%22 d=%22M800 600h200v200H800z%22 transform=%22matrix(1.32892 -.55182 -.06813 1.3 0 0)%22%2F%3E%3Cpath fill=%22none%22 d=%22M1000 600h200v200h-200zM1200 600h200v200h-200zM1400 600h200v200h-200zM1600 600h200v200h-200zM1800 600h200v200h-200zM0 800h200v200H0zM200 800h200v200H200zM400 800h200v200H400zM600 800h200v200H600z%22 transform=%22matrix(1.32892 -.55182 -.06813 1.3 0 0)%22%2F%3E%3Cpath fill=%22%23dddddd2c%22 d=%22M800 800h200v200H800z%22 transform=%22matrix(1.32892 -.55182 -.06813 1.3 0 0)%22%2F%3E%3Cpath fill=%22none%22 d=%22M1000 800h200v200h-200zM1200 800h200v200h-200zM1400 800h200v200h-200zM1600 800h200v200h-200zM1800 800h200v200h-200z%22 transform=%22matrix(1.32892 -.55182 -.06813 1.3 0 0)%22%2F%3E%3C%2Fg%3E%3Cpath fill=%22%23f3f3f3%22 filter=%22url(%23c)%22 opacity=%22.8%22 d=%22M0 0h2000v1000H0z%22%2F%3E%3Cdefs%3E%3CradialGradient id=%22a%22%3E%3Cstop offset=%220%22 stop-color=%22%23fff%22%2F%3E%3Cstop offset=%221%22 stop-color=%22%23fff%22 stop-opacity=%220%22%2F%3E%3C%2FradialGradient%3E%3Cfilter id=%22c%22 x=%22-800%22 y=%22-400%22 width=%222800%22 height=%221400%22 filterUnits=%22userSpaceOnUse%22 primitiveUnits=%22userSpaceOnUse%22 color-interpolation-filters=%22linearRGB%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%22.115%22 numOctaves=%224%22 seed=%2215%22 stitchTiles=%22no-stitch%22 x=%220%22 y=%220%22 width=%222000%22 height=%221000%22 result=%22turbulence%22%2F%3E%3CfeSpecularLighting surfaceScale=%2210%22 specularConstant=%22.19%22 specularExponent=%2220%22 lighting-color=%22%23fff%22 x=%220%22 y=%220%22 width=%222000%22 height=%221000%22 in=%22turbulence%22 result=%22specularLighting%22%3E%3CfeDistantLight azimuth=%223%22 elevation=%22100%22%2F%3E%3C%2FfeSpecularLighting%3E%3C%2Ffilter%3E%3C%2Fdefs%3E%3C%2Fsvg%3E");
+  }
+#container { margin: 0 auto; }
+
+#logo img { width: 140px;; }
+#menu a { color: inherit; font-size: 1.125rem; }
+
+#headline { text-align: center; }
+
+
+.feature img { width:40px; display:block; margin: 0 auto; object-fit: scale-down;} 
+.feature h2, .feature p, .feature h3 { text-align:center; }
+#taskTimeInStatusFeatures .floatLeft33 { min-height:240px; }
+#cardTimeInListFeatures .floatLeft33 { min-height:300px; }
+#cardTimeInListFeatures .floatLeft33 p,#cardTimeInListFeatures .floatLeft33 h3{ margin:10px; }
+.feature ul { font-size:13px; margin:0px; padding:0px; max-width:350px; display:inline; list-style-type: none; text-align:center;}
+
+input, textarea { border-color: #b3b3b3;background-color: #ffffff;color: #000000;     border-width: 1px; display: block; padding: 10px 12px; background-image: none; background-clip: padding-box; font:inherit; margin-bottom:10px;}
+input[type="submit"] { width:100px; }
+
+#footer, #footer a { font-size: 11px; color: black; }
+
+/* The Modal (background) */
+.modal {display: none; /* Hidden by default */position: fixed; /* Stay in place */z-index: 1; /* Sit on top */padding-top: 100px; /* Location of the box */left: 0;top: 0;width: 100%; /* Full width */height: 100%; /* Full height */ overflow: auto; /* Enable scroll if needed */background-color: rgb(0,0,0); /* Fallback color */background-color: rgba(0,0,0,0.4); /* Black w/ opacity */}
+
+/* Modal Content */
+.modal-content {background-color: #fefefe;margin: auto;padding: 20px;border: 1px solid #888;width: 80%;}
+
+/* The Close Button */
+.close {color: #aaaaaa;float: right;font-size: 28px;font-weight: bold;}
+
+.close:hover, .close:focus {color: #000;text-decoration: none;cursor: pointer;}
+
+.modal input { display: inline;  }
+.pad5 {padding:5px;}
+
+#copyright {float:left;width:85px;}
+#terms { float:right;width:175px; }
+
+.gtButton { background-color:black; color: white;--border-radius: 50px; border-radius: 50px; padding: 10px; text-decoration: none; display: block;margin: 0 auto; width: 100px; text-align:center;     }
+
+#cardTimeInList .gtButton {line-height: 40px;
+    width: 140px; }
+.gtButton img {     height: 35px;  margin-bottom: -10px; }
+#cardTimeInList { text-align:center; margin-bottom:45px;  }
+
+#pricing table { margin: 0 auto;  }
+#pricing table td { text-align:center; font-size:14px; border-width:1px; border-color:grey; }
+#pricing table th { background-color:black; color:white; }
+#pricing table tr { border-color:grey; background-color:white; color:black; }
+#pricing h3 { text-align:center; }
+#pricing p { text-align:center; font-style:italic; }
+#faq { text-align:center; }
+
+.addon { margin-bottom:25px;  }
+.post{  }
+.post img{ display: block; width:100%;  }
+
+.blogi { margin-bottom:20px;  }
+.blogItem { float: left; margin: 0 0 0 10px; }
+.blogItem h2 { margin: 0px; }
+.blogThumb { float: left; width:200px; height: 100px; overflow: hidden;}
+.blogThumb img { width:200px; border-radius: 10px; }
+
+ul li {margin-bottom: 15px;}
+  
+ ol {
+   list-style: none;
+   counter-reset: item;
+ }
+  
+ ol li {
+   counter-increment: item;
+   margin-bottom: 15px;
+ }
+  
+ ol li:before {
+   margin-right: 10px;
+   content: counter(item);
+   background: black;
+   border-radius: 100%;
+   color: white;
+   width: 1.2em;
+   text-align: center;
+   display: inline-block;
+ }
+
+blockquote{
+  font-size: 1.1em;
+  width:60%;
+  margin:50px auto;
+  font-family:Open Sans;
+  font-style:italic;
+  color: black;
+  padding:1.2em 30px 1.2em 75px;
+  border-left:8px solid black ;
+  line-height:1.6;
+  position: relative;
+}
+
+blockquote::before{
+  font-family:Arial;
+  content: "\201C";
+  color:black ;
+  font-size:4em;
+  position: absolute;
+  left: 10px;
+  top:-10px;
+}
+
+blockquote::after{
+  content: '';
+}
+
+blockquote span{
+  display:block;
+  color:#333333;
+  font-style: normal;
+  font-weight: bold;
+  margin-top:1em;
+}
+.quotes {margin-top:25px;}
+</style>
+<script>
+  function onLoad() {
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    var btnYes = document.getElementById("consentYes");
+    var btnNo = document.getElementById("consentNo");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+
+    btnYes.onclick=function() {
+      loadGa();
+      document.cookie = "consent=true; expires=Fri, 31 Dec 2040 23:59:59 GMT; Secure";
+      modal.style.display = "none";
+    };
+    btnNo.onclick=function() {
+      modal.style.display = "none";
+    };
+
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+      modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+
+    function loadGa() {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-MCJPTVHDXQ');//UA-163584785-1
+    }
+
+    var x = document.cookie;
+    if(x && x.indexOf('consent')>-1) {
+      loadGa();
+    } else {
+      modal.style.display = "block";
+    }
+    
+    
+   
+    const submit = document.getElementById('btnSubmit');
+    if(submit) {
+      const msg = document.getElementById('gtMsg');
+      const name = document.getElementById('gtname');
+      const email = document.getElementById('gtemail');
+      const text = document.getElementById('gttext');
+      function handleSubmit() {
+        event.preventDefault();
+
+        if(!name.value || !email.value || !text.value) {
+          msg.innerHTML="All fields are required";
+          modal.style.display = "block";
+          return;
+        }
+        
+        const myForm = document.getElementById('gtform');
+        const formData = new FormData(myForm);
+
+        fetch("/", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: new URLSearchParams(formData).toString(),
+        })
+          .then(function(){ msg.innerHTML="Message sent! You will get a reply soon."; modal.style.display = "block";  })
+          .catch(function(){ msg.innerHTML="Failed to send message. Please reach us out at admin@gtola.com"; modal.style.display = "block";  });
+      }
+
+      submit.addEventListener("click", handleSubmit);
+    }
+  }
+</script>
+
+   {% if page.sdata %}
+<script  type="application/ld+json" >
+  {{ page.sdata }}
+</script>
+   {% endif %}
+   
+   
+   
+   <script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="12312ac0-ef47-4dfe-8af3-f7de5fda60cd";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
+</head>
+<body onload="onLoad()">
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PCCBB3S8"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<div id="container">
+  <div id="header">
+    <div id="logo" class="floatLeft50" ><a href="/"><img alt="GTOLA Logo" src="{{site.baseurl}}/assets/gtolaLogoTextBlack.png"></img></a></div>
+    <div id="menu" class="floatRight50"><a href="{{site.baseurl}}/blog">Blog</a>&nbsp;&nbsp;<a href="{{site.baseurl}}/contact">Contact</a></div>
+    <div class="clear"></div>
+  </div>
+  
+  <div class="{% if page.id %} post {% else %} page {% endif %}">
+  {{ content }}
+  
+  {% if page.id %}
+    <h2>Related blog posts</h2>
+    <ul>
+    {% for post in site.posts %}
+      {% if post.url != page.url %}
+      <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+      {% endif %}
+
+    {% endfor %}
+    </ul>
+  {% endif %}
+  
+  </div>
+ 
+
+  
+  <div class="spacer25"></div>
+
+  <div id="footer">
+    <div id="copyright"> © 2024 GTOLA</div>
+    <div  id="terms" ><a href="{{site.baseurl}}/terms-of-service">Terms of Service</a><span>  &#8226;  </span><a href="{{site.baseurl}}/privacy-policy">Privacy Policy</a> </div>
+    <div class="clear"></div>
+  </div>
+  
+
+
+  <!-- The Modal -->
+  <div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <span  id="gtMsg" >Website uses cookies only for analytics. Consent?
+        <br/>
+        <input id="consentYes" type="submit" name="consent" value="Yes">
+        <span>  </span>
+        <input id="consentNo" type="submit" name="consent" value="No">
+      </span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

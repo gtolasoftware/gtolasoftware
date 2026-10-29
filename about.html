@@ -1,0 +1,56 @@
+---
+layout: null
+sitemap:
+  exclude: 'yes'
+---
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GTOLA - About</title>
+	<link href="/favicon.ico"/>
+	<style type="text/css">
+		#logo { width: 64px; }
+		.menu a { margin:5px; }
+	</style>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-MCJPTVHDXQ"></script>
+	<script>
+        function onLoad() {
+        var x = document.cookie;
+        var shouldload=false;
+        if(x && x.indexOf('consent')>-1) {
+          shouldload=true;
+        } else {
+          var answer = window.confirm("Website uses cookies only for analytics. Consent?")
+          if (answer) {
+            document.cookie = "consent=true; expires=Fri, 31 Dec 2040 23:59:59 GMT; Secure";
+            shouldload=true;
+          } else {
+            shouldload=false;
+          }
+        }
+        if(shouldload) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-MCJPTVHDXQ');//UA-163584785-1
+        }
+      }
+  </script>
+  </head>
+  <body onload="onLoad()">
+    <img id="logo" src="/assets/images/logo.png" />
+    <nav class="menu">
+      <a href="/">Home</a>
+      <a href="/privacy-policy.html">Privacy Policy</a>
+      <a href="/terms-of-service.html">Terms of Service</a>
+      <a href="/support.html">Support</a>
+      <a href="/about.html">About</a>
+    </nav>
+    <h1>hi!</h1>
+    <h2>I am Genti Tola, General Manager of CData Software EMEA team.
+    <br/>I use Trello and Jira extensively. These add-ons started as private tools to help me manage the team. They save quite some time.
+    </h2>
+  </body>
+</html>

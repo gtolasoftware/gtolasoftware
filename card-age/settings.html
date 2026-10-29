@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"> 
+    <link rel="stylesheet" href="https://p.trellocdn.com/power-up.css">
+    <style>
+    #textarea1 { height:100px; }
+    </style>
+  </head>
+  <body onload="GTOLA()">
+    <p>
+    <strong>debug</strong> - Set this to 1 if you are facing an issue with the Power-Up. Then go to the browser's Developer Console to check out the log.
+    </br>
+    <strong>unit</strong> - If you want to change the unit of measure for the duration in list. Possible values are days, minutes and hours.
+    </br>
+    <strong>refresh</strong> - Set this to the amount of seconds you want the card badges to be updated. I.e. 5 means the durations in cards are refreshed each 5 seconds
+    </br>
+    <strong>decimalplaces</strong> - Set this to the number of decimal places to show in the duration for each card. I.e. 0 means no decimal places will be shown
+    </br>
+    <strong>badgecolor</strong> - Set this to the background color you want for the time badge. Set it to <i>none</i> if you want a transparent background
+    </br>
+    Refresh the board after you have clicked save for the settings to kick-in.
+    </p>
+    <textarea id="textarea1" name="textareaname1"></textarea>
+    <button id="button1">Save</button>
+    <script src="https://p.trellocdn.com/power-up.min.js"></script>
+    <script>
+    function GTOLA() {
+      let t = window.TrelloPowerUp.iframe();
+
+      t.get('member','shared','CardAgeSettings').then(function(data){
+        if(data)
+          document.getElementById('textarea1').value=data;
+        else
+          document.getElementById('textarea1').value="debug=0\r\nunit=hours\r\nrefresh=3600\r\ndecimalplaces=2\r\nbadgecolor=green";
+      });
+
+      document.getElementById('button1').addEventListener('click', function () {
+        t.set('member','shared','CardAgeSettings', document.getElementById('textarea1').value);
+      });
+    }
+    </script>
+  </body>
+</html>

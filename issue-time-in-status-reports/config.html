@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-PCCBB3S8');</script>
+<!-- End Google Tag Manager -->
+
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TBGZM58SHG"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TBGZM58SHG');
+</script>
+<script src="https://connect-cdn.atl-paas.net/all.js" crossorigin="anonymous" ></script>
+<link rel="stylesheet" type="text/css" href="https://unpkg.com/@atlassian/aui@9.10.0/dist/aui/aui-prototyping.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+<script src="https://unpkg.com/@atlassian/aui@9.10.0/dist/aui/aui-prototyping.js"></script>
+<script>
+var requestCounter={};
+var AP2 = { 
+  request: function(params){
+    if(params.url.includes('/rest/api/3/search?fields=key,project,status,created&expand=transitions,changelog')) {
+      if(requestCounter['/rest/api/3/search?fields=key,project,status,created&expand=transitions,changelog']) {
+        params.success( '{ "total":1,"issues": [ ] }' );
+      } else {
+        requestCounter['/rest/api/3/search?fields=key,project,status,created&expand=transitions,changelog']=true;
+        params.success( '{"total":1,"issues": [{"id": 1,"c1":"","fields":{"created":"2023-01-06T22:27:47.163+0200","status":{"name":"s1"}},"transitions": [{"name": "To Do"}],"changelog": {"histories": [{"created": "2023-05-06T22:27:47.163+0200","items": [{"field": "Status","fromString": "To Do","toString": "Done"}]}]}}]}' );
+      }
+    }
+    else if(params.url.includes('/rest/api/3/field/search?type=custom&query=TEST')) {
+      if(requestCounter['/rest/api/3/field/search?type=custom&query=TEST']) {
+        params.success( '{ "total":1,"issues": [ ] }' );
+      } else {
+        requestCounter['/rest/api/3/field/search?type=custom&query=TEST']=true;
+        params.success( '{"total":1,"issues": [{"id": 1,"c1":"","fields":{"created":"2023-01-06T22:27:47.163+0200","status":{"name":"s1"}},"transitions": [{"name": "To Do"}],"changelog": {"histories": [{"created": "2023-05-06T22:27:47.163+0200","items": [{"field": "Status","fromString": "To Do","toString": "Done"}]}]}}]}' );
+      }
+    }
+    else if(params.url.includes('/rest/api/2/field/') && params.type==='DELETE') {
+        params.success( '{}' );
+    }
+    else if(params.url.includes('/rest/api/3/field/search?type=custom&query=')) {
+      if(requestCounter['/rest/api/3/field/search?type=custom&query=']) {
+        params.success( '{ "values": [ ] }' );
+      } else {
+        requestCounter['/rest/api/3/field/search?type=custom&query=']=true;
+        params.success( '{"values": [{"id": 1,"name":"p1key Duration In DOING"}]}' );
+      }
+    }
+    else if(params.url.includes('field/search')) {
+      if(requestCounter['field/search']) {
+        params.success( '{ "values": [ ] }' );
+      } else {
+        requestCounter['field/search']=true;
+        params.success( '{"values": [{"id": "c1","name":"Custom1"}]}' );
+      }
+    }///rest/api/3/field
+    else if(params.url.includes('/api/3/field')) {
+        params.success( '{"id":"c2","name":"C2"}' );
+    }///rest/api/3/screens
+    else if(params.url.includes('/tabs') && params.type==='GET') {
+        params.success( '[{"id": "t1","name":"t1"}]' );
+    }
+    else if(params.url.includes('rest/api/3/screens') && params.type==='GET') {
+      if(requestCounter['rest/api/3/screens']) {
+        params.success( '{ "values": [ ] }' );
+      } else {
+        requestCounter['rest/api/3/screens']=true;
+        params.success( '{"values": [{"id": "s1","name":"screen1"}]}' );
+      }
+    }
+   
+    else if(params.url.includes('/tabs') && params.type==='POST') {
+        params.success( '{"id":"t2","name":"tab 2"}' );
+    }
+    else if(params.url.includes('rest/api/3/screens') && params.type==='POST') {
+        params.success( '{"id":"t2","name":"tab 2"}' );
+    }
+    else if(params.url.includes('rest/api/3/screens') && params.type==='DELETE') {
+        params.success( '{}' );
+    }
+    else if(params.url.includes('/fields') && params.type==='POST') {
+        params.success( '{}' );
+    }
+    else if(params.url.includes('/rest/api/3/issue/') && params.type==='PUT') {
+        params.success( '{}' );
+    }
+    else if(params.url.includes('/rest/api/3/screenscheme') && params.type==='POST') {
+        params.success( '{"id":"t2"}' );
+    }
+    else if(params.url.includes('/addToDefault/') && params.type==='POST') {
+        params.success( '{}' );
+    }
+    else if(params.url.includes('/rest/api/3/issuetype/project?projectId') && params.type==='GET') {
+        params.success( '[{"id":"t2"}]' );
+    }
+    else if(params.url.includes('issuetypescreenscheme') && params.type==='POST') {
+        params.success( '[{"id":"t2"}]' );
+    }
+    else if(params.url.includes('issuetypescreenscheme/project') && params.type==='PUT') {
+        params.success( '{}' );
+    }
+    else if(params.url.includes('/rest/api/3/issuetype/project?projectId') && params.type==='GET') {
+        params.success( '[{"id":"t2"}]' );
+    }
+    else if(params.url.includes('/rest/api/3/project/search')) {
+      if(requestCounter['/rest/api/3/project/search']) {
+        params.success( '{ "values": [ ] }' );
+      } else {
+        requestCounter['/rest/api/3/project/search']=true;
+        params.success( '{"values": [{"id": "p1","key":"p1key","name":"p1name","style":"classic"},{"style":"classic","id": "p2","key":"p2key","name":"p2name"}]}' );
+      }
+    }
+  }
+};
+
+GTOLA = {
+  runButton:null,
+  STATUS_INFO : { PREV_STATUS:"",STATUS:"", PERCENTAGE:0,TOTAL:0,NUMBER_OF_JOBS:0 },
+  THROTTLING_STATUS: 'Waiting two minutes for API throttling to clear, hang on, do not refresh the browser.',
+  CUSTOMFIELD_PREFIX: "",
+  PROJECT_KEY: "",
+  PROJECT_ID: "",
+  test: function () {
+      var projectId='10007';//BLAN
+      var issueId='BLAN-1';//20273 BLAN-1
+      //var projectId='10008';//IT
+      //var issueId='IT-1';//IT-1
+      var customFieldId=null;//customfield_10556
+      var rnd = Math.floor(Math.random() * 10000000);
+      var screenId=null;
+      var tabId=null;
+      var screenSchemeId=null;
+      var issueTypeIdsForProject=[];
+      var issueTypeScreenSchemeId=null;
+      var tmpPostData = JSON.stringify({
+        "description": 'cd '+rnd,
+        "name": 'c '+rnd,
+        "searcherKey": "com.atlassian.jira.plugin.system.customfieldtypes:numberrange",
+        "type": "com.atlassian.jira.plugin.system.customfieldtypes:float"
+      });
+
+      GTOLA.bulk([{ url: '/rest/api/3/field', postData: tmpPostData}], 'POST',1, function(argument) {
+        GTOLA.bulk([{ url: '/rest/api/3/screens', postData: JSON.stringify({"description": "d"+rnd, "name": "n"+rnd })}], 'POST',1, function(argument) {
+          GTOLA.bulk([{ url: '/rest/api/3/screens/'+screenId+'/tabs'}], 'GET',1, function(argument) {//, postData: JSON.stringify({"name": "Default" })
+            GTOLA.bulk([{ url: '/rest/api/3/screens/'+screenId+'/tabs/'+tabId+'/fields', postData: JSON.stringify({"fieldId": customFieldId })}], 'POST',1, function(argument) {
+              GTOLA.bulk([{ url: '/rest/api/3/screenscheme', postData: JSON.stringify({ "description": "d"+rnd, "name": "n"+rnd,"screens": {"default": screenId }})}], 'POST',1, function(argument) {
+                GTOLA.bulk([{ url: '/rest/api/3/issuetypescreenscheme', postData: JSON.stringify({ name:'n'+rnd,issueTypeMappings: [{'issueTypeId':'default','screenSchemeId': screenSchemeId}] })}], 'POST',1, function(argument) {
+                  GTOLA.bulk([{ url: '/rest/api/3/issuetypescreenscheme/project', postData: JSON.stringify({  "issueTypeScreenSchemeId": issueTypeScreenSchemeId,  "projectId": projectId})}], 'PUT',1, function(argument) {
+                    var tmp ={"fields": {  } };
+                    tmp.fields[customFieldId]=1.11;
+                    GTOLA.bulk([{ url: '/rest/api/3/issue/'+issueId, postData: JSON.stringify(tmp)}], 'PUT',1, function(argument) {
+                      console.log('done');
+                    }, function(argument, argument2) {
+                      
+                    });
+                  }, function(argument, argument2) {
+
+                  });
+                }, function(argument, argument2) {
+                  issueTypeScreenSchemeId = argument.id;
+                });
+              }, function(argument, argument2) {
+                screenSchemeId=argument.id+"";
+              }); 
+            }, function(argument, argument2) {
+              
+            }); 
+          }, function(argument, argument2) {
+            tabId=argument[0].id;
+          });      
+        }, function(argument, argument2) {
+          screenId=argument.id;
+        });
+      }, function(argument, argument2) {
+        customFieldId=argument.id;
+      });
+
+//GTOLA.bulk([{ url: '/rest/api/3/field/'+customFieldId+'/context' , postData: JSON.stringify({"name": "n"+rnd, "projectIds":[ '10008' ] })}], 'POST',1, function(argument) {
+//GTOLA.bulk([{ url: '/rest/api/3/screens/addToDefault/'+customFieldId }], 'POST',1, function(argument) {
+//GTOLA.bulk([{ url: '/rest/api/3/issuetype/project?projectId='+projectId}], 'GET',1, function(argument) {
+//var issueTypeScreenSchemePostData = { name:'n'+rnd,issueTypeMappings: [{'issueTypeId':'default','screenSchemeId': screenSchemeId}] };
+// for(var i=0;i<issueTypeIdsForProject.length;i++)
+// issueTypeScreenSchemePostData.issueTypeMappings.push({'issueTypeId':issueTypeIdsForProject[i],'screenSchemeId': screenSchemeId});
+//GTOLA.bulk([{ url: '/rest/api/3/issuetypescreenscheme', postData: JSON.stringify(issueTypeScreenSchemePostData)}], 'POST',1, function(argument) {
+//GTOLA.bulk([{ url: '/rest/api/3/issuetypescreenscheme/project', postData: JSON.stringify({  "issueTypeScreenSchemeId": issueTypeScreenSchemeId,  "projectId": projectId})}], 'PUT',1, function(argument) {
+//GTOLA.bulk([{ url: '/rest/api/3/issue/'+issueId, postData: JSON.stringify({"fields": { "customfield_10556":1.11 } })}], 'PUT',1, function(argument) {
+     
+      
+    },
+
+  loadProjects:function (){ 
+    GTOLA.runButton = AJS.$('#gtolaRunButton')[0];
+
+    var projects=[];
+
+    GTOLA.doGetMultithread('/rest/api/3/project/search?fields=id,key,name,style,simplified,projectTypeKey&maxResults=100','values', 5, 
+      function(data) {
+        for(var i=0;i<data.values.length;i++) {
+          if(data.values[i].style==='classic')
+            projects.push({'id':data.values[i].id+','+data.values[i].key,'text':data.values[i].name});
+        }
+      }
+      , function() {
+        GTOLA.PROJECT_KEY = projects[0].id.split(",")[1];
+        GTOLA.PROJECT_ID = projects[0].id.split(",")[0];
+        GTOLA.CUSTOMFIELD_PREFIX = GTOLA.PROJECT_KEY +' '+ 'Duration In ';
+      
+        var sel = $('<select id="gtolaSelect">').appendTo('#projectSelectContainer');
+        $(projects).each(function() {
+         sel.append($("<option>").attr('value',this.id).text(this.text));
+        });
+         AJS.$('#gtolaSelect').auiSelect2(); 
+         
+         AJS.$("#gtolaSelect").on("change", function(){
+            GTOLA.PROJECT_KEY = this.value.split(",")[1];
+            GTOLA.PROJECT_ID = this.value.split(",")[0];
+            GTOLA.CUSTOMFIELD_PREFIX = GTOLA.PROJECT_KEY +' '+ 'Duration In ';
+         });
+      });
+  },  
+  removeAllCustomFields:function (){ 
+    var urlsToDelete=[];
+    GTOLA.doGetMultithread('/rest/api/3/field/search?type=custom&query='+encodeURIComponent(GTOLA.CUSTOMFIELD_PREFIX)+'&maxResults=50','values', 5, 
+      function(data) {
+        for(var i=0;i<data.values.length;i++) {
+          urlsToDelete.push({"url":'/rest/api/3/field/'+data.values[i].id});
+        }
+      }
+      ,function() {
+        GTOLA.bulk(urlsToDelete, 'DELETE',10, function(argument) {
+          doneCallback();
+        }, function(argument, argument2) {
+        });
+      });
+  },
+  bulk: function bulk(urlsAndPostDatas, method,threads, doneCallback, responseCallback) {
+      var retryCount=0;
+      var retryCounter=0;
+      run(urlsAndPostDatas, method,threads, doneCallback, responseCallback);
+
+      function run(urlsAndPostDatas, method,threads, doneCallback, responseCallback) {
+          var total = urlsAndPostDatas.length;
+          var itemsPerThread = Math.floor( total/threads );
+
+          if(threads>=total) {
+              itemsPerThread=1;
+              threads=total;
+          }
+          retryCount=20*threads;
+          var done = [];
+          for(var i=0;i<threads;i++)
+              done.push(false);
+          for(var i=0;i<threads;i++)
+              nea1(i,i*itemsPerThread,i===threads-1 ? total : i*itemsPerThread+itemsPerThread,function(argg) { done[argg]=true; check1(done,doneCallback); },
+                 urlsAndPostDatas,method, responseCallback);
+      }
+
+      function check1(done,callback) {
+          for(var j=0;j<done.length;j++)
+              if(!done[j])
+                  return;
+           callback();
+      }
+
+      function nea1(ii, tmpUrl, max, callback, urlsAndPostDatas, method,responseCallback) {
+            if(GTOLA.STATUS_INFO.STATUS===GTOLA.THROTTLING_STATUS){
+              GTOLA.STATUS_INFO.STATUS=GTOLA.PREV_STATUS;
+              GTOLA.updateStatus();
+            }
+
+         if(tmpUrl>=max){
+             callback(ii);
+         } else {
+           AP.request({url: urlsAndPostDatas[tmpUrl].url, type: method, data: urlsAndPostDatas[tmpUrl].postData, contentType: 'application/json', headers: { Accept: 'application/json' }, success: function(data){    
+             console.log(urlsAndPostDatas[tmpUrl].url);
+             responseCallback(data ? JSON.parse(data) : null,tmpUrl);
+             nea1(ii, tmpUrl+1,max,callback,urlsAndPostDatas,method, responseCallback);
+          }, error: function(xhr, statusText, errorThrown){  
+              if(xhr.status===429) {
+                 if(GTOLA.STATUS_INFO.STATUS!==GTOLA.THROTTLING_STATUS)
+                    GTOLA.PREV_STATUS = GTOLA.STATUS_INFO.STATUS;
+                GTOLA.STATUS_INFO.STATUS=GTOLA.THROTTLING_STATUS;
+                GTOLA.updateStatus();
+
+                var retryAfter = xhr.getResponseHeader('retry-after');
+                if(retryAfter)
+                  retryAfter=parseInt(retryAfter);
+                else
+                  retryAfter=110;
+               console.log("GT:retry " +tmpUrl );
+               if(retryCounter++<retryCount)
+                   setTimeout(nea1, retryAfter*1000 ,ii, tmpUrl, max, callback,urlsAndPostDatas,method, responseCallback);
+             } else {
+                console.log("GT:error " +xhr.status );
+                nea1(ii, tmpUrl+1,max,callback,urlsAndPostDatas,method, responseCallback);
+             }
+
+          } }); 
+        }
+      }
+
+    },
+  doGetMultithread: function(paramUrl, paramXpath, threads, responseCallback, doneCallback) {
+      var sharedStart=0;
+      var sharedDone=false;
+      var sharedStarted=0;
+      var sharedFinished=0;
+      var xpath="";
+      var url="";
+      var doneCalled=false;
+      var retryCount=0;
+      var retryCounter=0;
+
+      run(threads,doneCallback);
+
+      function run(threads, doneCallback){   
+        sharedStart=threads;
+        sharedDone=false;
+        sharedStarted=0;
+        sharedFinished=0;
+        url=paramUrl;
+        xpath=paramXpath;
+        retryCount=10*threads;
+        for(var i=0;i<sharedStart;)
+          nea(i++, function() { doneCallback(); } );
+      }
+
+      function nea(tmpUrl, doneCallback, retry) {
+        if(retry) {
+                  GTOLA.STATUS_INFO.STATUS=GTOLA.PREV_STATUS;
+                  GTOLA.updateStatus();
+        }
+
+
+         if(sharedDone && sharedFinished===sharedStarted && !retry){
+            if(!doneCalled) {
+              doneCalled=true;
+             doneCallback();
+           }
+         } else {
+           if(!sharedDone || retry) {
+            sharedStarted++;
+            AP.request({url: url+'&startAt='+(tmpUrl*100), type: 'GET', success: function(responseText){    
+               let data = JSON.parse(responseText);
+               if(data[xpath].length===0) 
+                sharedDone=true;
+               sharedFinished++;
+               console.log(url+'&startAt='+(tmpUrl*100));
+               
+               responseCallback(data);
+               
+               nea(sharedStart++,doneCallback);
+              }, error: function(xhr, statusText, errorThrown){  
+                sharedFinished++;
+                if(xhr.status===429) {
+                 console.log("GT:retry " +tmpUrl );
+                 if(GTOLA.STATUS_INFO.STATUS!==THROTTLING_STATUS)
+                    GTOLA.PREV_STATUS = GTOLA.STATUS_INFO.STATUS;
+                  GTOLA.STATUS_INFO.STATUS=THROTTLING_STATUS;
+                  GTOLA.updateStatus();
+                 if(retryCounter++<retryCount)
+                   setTimeout(nea, 110*1000 ,tmpUrl,doneCallback, true);
+                } else {
+                  console.log("GT:error " +xhr.status );
+                  nea(sharedStart++,doneCallback);
+                }
+              } 
+            });	
+          }
+        }
+      }
+    }
+  ,
+  updateStatus:  function() {
+      if(GTOLA.STATUS_INFO.PERCENTAGE>=1) {
+        GTOLA.STATUS_INFO.PERCENTAGE=1;
+        GTOLA.STATUS_INFO.STATUS='Done.';
+      }
+      document.getElementById("gtolaStatus").innerHTML = Math.round(parseFloat(GTOLA.STATUS_INFO.PERCENTAGE.toFixed(2))*100)+"% "+GTOLA.STATUS_INFO.STATUS;
+    }
+  ,
+  main: function(mainArg1,mainArg2) {
+    if(GTOLA.runButton.isBusy())
+      return;
+
+    GTOLA.STATUS_INFO.PREV_STATUS="";GTOLA.STATUS_INFO.STATUS="";GTOLA.STATUS_INFO.PERCENTAGE=0;GTOLA.STATUS_INFO.TOTAL=0;GTOLA.STATUS_INFO.NUMBER_OF_JOBS=0;
+
+    GTOLA.runButton.busy();
+
+    
+    GTOLA.STATUS_INFO.NUMBER_OF_JOBS=6;
+    GTOLA.STATUS_INFO.STATUS='Getting issues for the selected project';
+    GTOLA.updateStatus();
+    //1. GET ISSUES and CALCULATE
+    getIssues(function(getIssuesResult) {   
+      //GTOLA.STATUS_INFO.PERCENTAGE += 1 / GTOLA.STATUS_INFO.NUMBER_OF_JOBS; 
+      GTOLA.STATUS_INFO.STATUS='Checking if there are any custom fields to create';
+      GTOLA.updateStatus();
+      //2 FIND ALL STATUSES AND CHECK IF ANY CUSTOM FIELD IS MISSING 
+      getMissingCustomFields(getIssuesResult,function(getIssuesResult, missingCustomFieldsResult) {
+        GTOLA.STATUS_INFO.PERCENTAGE += 1 / GTOLA.STATUS_INFO.NUMBER_OF_JOBS; 
+        GTOLA.STATUS_INFO.STATUS='Creating custom fields';
+        GTOLA.updateStatus();
+        //3. CREATE MISSING CUSTOM FIELDS   
+        createCustomFields(getIssuesResult, missingCustomFieldsResult, function(getIssuesResult) {
+          GTOLA.STATUS_INFO.PERCENTAGE += 1 / GTOLA.STATUS_INFO.NUMBER_OF_JOBS; 
+          GTOLA.STATUS_INFO.STATUS='Adding custom fields to screen tabs';
+          GTOLA.updateStatus();
+          //4. ADD CUSTOM FIELDS TO SCREENS
+          addCustomFieldsToScreenTabs(getIssuesResult,function(){
+              GTOLA.STATUS_INFO.PERCENTAGE += 1 / GTOLA.STATUS_INFO.NUMBER_OF_JOBS; 
+              GTOLA.STATUS_INFO.STATUS='Updating issues with latest duration values in each of their statuses';
+              GTOLA.updateStatus();
+              //5. UPDATE ISSUES
+              GTOLA.STATUS_INFO.TOTAL=Object.keys(getIssuesResult.times).length;
+              updateIssues(getIssuesResult, function(){
+               //6. REMOVE CUSTOM FIELDS FROM SCREENS
+                GTOLA.STATUS_INFO.STATUS='Removing custom fields from screen tabs';
+                GTOLA.updateStatus();
+                removeCustomFieldsfromTabs(getIssuesResult, function(){
+                  GTOLA.STATUS_INFO.PERCENTAGE =1; 
+                  GTOLA.STATUS_INFO.STATUS='Done!';
+                  GTOLA.updateStatus();
+                  console.log('done');
+
+                  GTOLA.runButton.idle();
+                });
+              });
+          });
+        });
+      });
+      
+    });
+
+    function removeCustomFieldsfromTabs(getIssuesResult, doneCallback) {
+      if(!getIssuesResult.fieldsInTabToRemove || (getIssuesResult.fieldsInTabToRemove && getIssuesResult.fieldsInTabToRemove.length===0)) { 
+        doneCallback();
+      } else {   
+        GTOLA.bulk(getIssuesResult.fieldsInTabToRemove, 'DELETE',10, function(argument) {
+          doneCallback();
+        }, function(argument, argument2) {
+        });
+     }
+    }
+
+    function updateIssues(getIssuesResult, doneCallback) {
+      var inTimesKeys = Object.keys(getIssuesResult.times);
+      var urlsAndPostDatas = [];
+      for(var i=0;i<inTimesKeys.length;i++) {
+        var issueKey=inTimesKeys[i];
+        var postCustomfieldData = {};
+        postCustomfieldData['fields']={};
+        postCustomfieldData['update']={};
+        
+        var times = Object.keys(getIssuesResult.times[issueKey]);
+        for(var j=0;j<times.length;j++) {
+          var tmpStatus = times[j];
+          if(tmpStatus!=='currentList')
+            postCustomfieldData['fields'][getIssuesResult.existingCustomFields[GTOLA.CUSTOMFIELD_PREFIX+tmpStatus]]=parseFloat(getIssuesResult.times[issueKey][tmpStatus].time.toFixed(3));      
+            //postCustomfieldData['update'][getIssuesResult.existingCustomFields[CUSTOMFIELD_PREFIX+tmpStatus]]=[  { 'set': parseFloat(getIssuesResult.times[issueKey][tmpStatus].time.toFixed(3)) } ];      
+        }
+        //+'?overrideEditableFlag=true'
+        urlsAndPostDatas.push({ url: '/rest/api/3/issue/'+issueKey, postData: JSON.stringify(postCustomfieldData)});
+      }
+      if(urlsAndPostDatas.length===0)
+        doneCallback();
+
+      GTOLA.bulk(urlsAndPostDatas, 'PUT',10, function(argument) {
+        doneCallback();
+      }, function(argument, argument2) {
+        GTOLA.STATUS_INFO.PERCENTAGE += 1 / GTOLA.STATUS_INFO.TOTAL / GTOLA.STATUS_INFO.NUMBER_OF_JOBS; 
+        GTOLA.updateStatus();
+      });
+      
+    }
+
+    function getIssues(doneCallback) {
+      var result = { times: {}, existingCustomFields: {}};//&jql=project=PROJ2    updated%20%3E%3D%20-1d%20AND%20project%20in%20%28BUG%2C%20BUG2%2C%20ITIS%2C%20P3%2C%20PROJ2%2C%20SUP%29    updated%20%3E%3D%20-1.4h%20AND%20project%20%3D%20PROJ%20order%20by%20updated%20DESC
+      var jql = '&jql=project='+encodeURIComponent(GTOLA.PROJECT_KEY);
+      GTOLA.doGetMultithread('/rest/api/3/search?fields=key,project,status,created&expand=transitions,changelog&maxResults=100'+jql,'issues', 10, 
+      function(data) {
+        for(var j=0;j<data.issues.length;j++)
+          calculate(data.issues[j],result.times,result.existingCustomFields);
+          
+        if(data.issues.length>0)
+          GTOLA.STATUS_INFO.PERCENTAGE += 1 / (data.total/data.issues.length) / GTOLA.STATUS_INFO.NUMBER_OF_JOBS; 
+        GTOLA.updateStatus();
+      }
+      , function() {
+        doneCallback(result);
+      });
+    }
+
+    function getMissingCustomFields(getIssuesResult, doneCallback) {
+      var allFields = {};
+      var missing = [];
+      GTOLA.doGetMultithread('/rest/api/3/field/search?type=custom&query='+encodeURIComponent(GTOLA.CUSTOMFIELD_PREFIX)+'&maxResults=100','values', 3, 
+        function(data) {
+          for(var j=0;j<data.values.length;j++)
+            allFields[data.values[j].name]=data.values[j].id;
+        }
+      , function() {
+        var missingCustomFieds = {};
+        var inTimesKeys = Object.keys(getIssuesResult.existingCustomFields);
+        for(var i=0;i<inTimesKeys.length;i++) {
+          if(!allFields[inTimesKeys[i]])
+            missing.push(inTimesKeys[i]);
+          else
+            getIssuesResult.existingCustomFields[inTimesKeys[i]]=allFields[inTimesKeys[i]];
+        }
+        doneCallback(getIssuesResult,missing);
+      });
+    }
+
+    function createCustomFields(getIssuesResult, customFieldsArray, callback) {
+      if(customFieldsArray.length===0)
+        callback(getIssuesResult);
+    
+      var urlsAndPostDatas = [];
+      for(var i=0;i<customFieldsArray.length;i++) {
+        var tmpPostData = JSON.stringify({
+          "description": customFieldsArray[i] +' Status',
+          "name": customFieldsArray[i],
+          "searcherKey": "com.atlassian.jira.plugin.system.customfieldtypes:numberrange",
+          "type": "com.atlassian.jira.plugin.system.customfieldtypes:float"
+        });
+        urlsAndPostDatas.push({ url: '/rest/api/3/field', postData: tmpPostData});
+      }
+
+
+      GTOLA.bulk(urlsAndPostDatas, 'POST',10, function(argument) {
+        //done
+        callback(getIssuesResult);
+      }, function(argument, argument2) {
+        //response
+        getIssuesResult.existingCustomFields[customFieldsArray[argument2]]=argument.id;
+      });
+    }
+    
+    function addCustomFieldsToScreenTabs(getIssuesResult, callback) {
+      const select = document.getElementById("gtolaSelect");
+      var projectId=GTOLA.PROJECT_ID;
+      var projectIssueTypeScreenSchemes=null;
+      var screensToUpdate={};
+      GTOLA.bulk([{ url: '/rest/api/3/issuetypescreenscheme/project?maxResults=100&projectId='+encodeURIComponent(projectId)}], 'GET',1, function(argument) {
+        var screenSchemeResult=null;
+        GTOLA.bulk([{ url: '/rest/api/3/screenscheme?maxResults=100&expand=issueTypeScreenSchemes'}], 'GET',1, function(argument) {
+          for(var i=0;i<screenSchemeResult.values.length;i++) {
+            var found=false;
+            for(var j=0;j<projectIssueTypeScreenSchemes.values.length;j++) {
+              for(var k=0;k<screenSchemeResult.values[i].issueTypeScreenSchemes.values.length;k++) {
+                if(screenSchemeResult.values[i].issueTypeScreenSchemes.values[k].id===projectIssueTypeScreenSchemes.values[j].issueTypeScreenScheme.id)
+                  found=true;
+              }
+            }
+            if(found) {
+              var tmpScreens=[screenSchemeResult.values[i].screens.default, screenSchemeResult.values[i].screens.create, screenSchemeResult.values[i].screens.edit, screenSchemeResult.values[i].screens.view];
+              for(var ii=0;ii<tmpScreens.length;ii++) {
+                if(tmpScreens[ii]) {
+                  if(!screensToUpdate[tmpScreens[ii]])
+                    addFieldsToTabs(getIssuesResult, callback,projectId,tmpScreens[ii]);
+                  else
+                    screensToUpdate[tmpScreens[ii]]=tmpScreens[ii];
+                }
+              }
+            }
+          }
+        }, function(ar, ar2) {
+          screenSchemeResult=ar;
+        });
+        
+      }, function(argument, argument2) {
+        projectIssueTypeScreenSchemes=argument;
+      });
+    
+    
+
+      <!-- var screenId=null; -->
+      <!-- var screenName = "GTOLA ProjectID "+projectId +" Screen"; -->
+      
+      
+      <!-- GTOLA.bulk([{ url: '/rest/api/3/screens?queryString='+encodeURIComponent(screenName)}], 'GET',1, function(argument) { -->
+        <!-- if(!screenId) { -->
+          <!-- GTOLA.bulk([{ url: '/rest/api/3/screens', postData: JSON.stringify({"description": screenName, "name": screenName })}], 'POST',1, function(argument) { -->
+            <!-- addFieldsToTabs(getIssuesResult, callback,projectId,screenId); -->
+          <!-- }, function(argument, argument2) { -->
+            <!-- screenId=argument.id; -->
+            <!-- getIssuesResult.screenToDelete = screenId; -->
+          <!-- }); -->
+        <!-- } else { -->
+          <!-- addFieldsToTabs(getIssuesResult, callback,projectId,screenId); -->
+        <!-- } -->
+      <!-- }, function(argument, argument2) { -->
+        <!-- if(argument.values && argument.values.length>0) { -->
+          <!-- screenId=argument.values[0].id; -->
+          <!-- getIssuesResult.screenToDelete = screenId; -->
+        <!-- } -->
+      <!-- }); -->
+    }
+    
+    function addFieldsToTabs(getIssuesResult, callback,projectId,screenId) {
+      var tabId=null;
+      var screenSchemeId=null;
+      var issueTypeScreenSchemeId=null;
+      var screenSchemeName = "GTOLA ProjectID "+projectId+" Screen Scheme";
+      GTOLA.bulk([{ url: '/rest/api/3/screens/'+screenId+'/tabs'}], 'GET',1, function(argument) {
+        var inTimesKeys = Object.keys(getIssuesResult.existingCustomFields);
+        if(inTimesKeys.length==0)
+          callback();
+        getIssuesResult.fieldsInTabToRemove=[];
+        var tabsPostDatas = [];
+        for(var i=0;i<inTimesKeys.length;i++) {
+          var customFieldId = getIssuesResult.existingCustomFields[inTimesKeys[i]];
+          var postData = {};
+          postData['fieldId']=customFieldId;
+          tabsPostDatas.push({ url: '/rest/api/2/screens/'+screenId+'/tabs/'+tabId+'/fields', postData: JSON.stringify(postData)});
+          getIssuesResult.fieldsInTabToRemove.push({ url: '/rest/api/2/screens/'+screenId+'/tabs/'+tabId+'/fields/'+customFieldId });
+        }
+        
+        GTOLA.bulk(tabsPostDatas, 'POST',10, function(argument) {
+          GTOLA.bulk([{ url: '/rest/api/3/screenscheme', postData: JSON.stringify({ "description": screenSchemeName, "name": screenSchemeName,"screens": {"default": screenId }})}], 'POST',1, function(argument) {
+            GTOLA.bulk([{ url: '/rest/api/3/issuetypescreenscheme', postData: JSON.stringify({ name:"GTOLA Issue Type Screen for ProjectId "+projectId,issueTypeMappings: [{'issueTypeId':'default','screenSchemeId': screenSchemeId}] })}], 'POST',1, function(argument) {
+              GTOLA.bulk([{ url: '/rest/api/3/issuetypescreenscheme/project', postData: JSON.stringify({  "issueTypeScreenSchemeId": issueTypeScreenSchemeId,  "projectId": projectId})}], 'PUT',1, function(argument) {
+                 callback();
+              }, function(argument, argument2) {
+
+              });
+            }, function(argument, argument2) {
+              issueTypeScreenSchemeId = argument.id;
+              //getIssuesResult.issueTypeScreenSchemeToDelete=issueTypeScreenSchemeId;
+            });
+          }, function(argument, argument2) {
+            screenSchemeId=argument.id+"";
+            //getIssuesResult.screenSchemeToDelete=screenSchemeId;
+          }); 
+        }, function(argument, argument2) {
+          
+        }); 
+      }, function(argument, argument2) {
+        tabId=argument[0].id;
+      }); 
+    }
+    
+    function calculate(DATA,TIMES,CUSTOM_FIELDS_IN_TIMES) { 
+      console.log((new Date().toISOString()) + " GTOLALOG K: "+DATA.key+" I: "+DATA.id+" DATA: " + JSON.stringify(DATA));
+      for(var i=0;i<DATA.transitions.length;i++)
+        console.log((new Date().toISOString()) + " GTOLALOG K: "+DATA.key+" I: "+DATA.id+" TRANSITION: " + JSON.stringify(DATA.transitions[i])); 
+      for(var i=0;i<DATA.changelog.histories.length;i++)
+        console.log((new Date().toISOString()) + " GTOLALOG K: "+DATA.key+" I: "+DATA.id+" CHANGELOG: "+JSON.stringify(DATA.changelog.histories[i]));
+      
+      let metric = 1000 * 60 * 60 * 24;
+      
+      let tmpDate = new Date(DATA.fields.created);
+      let tmpCardId = DATA.key;
+      let tmpTransition = DATA.transitions.length  > 0 ? DATA.transitions[0].name : "No Transition";
+      let tmpList = DATA.changelog.histories.length === 0 ? DATA.fields.status.name : tmpTransition;
+      let tmpDone=false;
+      for(let i=0;i<DATA.changelog.histories.length;i++) {
+        for(let j=0;j<DATA.changelog.histories[i].items.length;j++) {
+          if(DATA.changelog.histories[i].items[j].field==="status") {
+            tmpList = DATA.changelog.histories[i].items[j].fromString;
+            tmpDone=true;
+            break;
+          }
+        }
+        if(tmpDone)
+          break;
+      }
+      if(!tmpDone)
+        tmpList=DATA.fields.status.name;
+    
+      //debugger;
+      
+      let startFrom = DATA.changelog.histories.length-1;
+      let moved = false;
+      let prevStatusAfterMove=null;
+      for(let i=0;i<DATA.changelog.histories.length && !moved;i++) {
+        for(let j=0;j<DATA.changelog.histories[i].items.length;j++) {
+          if(DATA.changelog.histories[i].items[j].field==="status") {
+            prevStatusAfterMove = DATA.changelog.histories[i].items[j].fromString;
+          } else if(DATA.changelog.histories[i].items[j].field==="project") {
+            var tmpst=(DATA.fields && DATA.fields.status) ? DATA.fields.status.name : "No Status";
+            tmpList=prevStatusAfterMove ? prevStatusAfterMove : tmpst;
+            tmpDate= new Date(DATA.changelog.histories[i].created);
+            startFrom = i;
+            moved=true;
+            break;
+          }
+        }
+      }
+      
+      TIMES[tmpCardId] = {};
+      TIMES[tmpCardId]['currentList']=tmpList;
+      TIMES[tmpCardId][tmpList] = {};
+      TIMES[tmpCardId][tmpList]['from']=tmpDate;
+      TIMES[tmpCardId][tmpList]['time']=0;
+      
+      CUSTOM_FIELDS_IN_TIMES[GTOLA.CUSTOMFIELD_PREFIX + tmpList]="";
+      
+      for(let i=startFrom; i>=0; i--) {  
+        for(let j=0;j<DATA.changelog.histories[i].items.length;j++)
+          if(DATA.changelog.histories[i].items[j].field==="status") {
+            tmpDate = new Date(DATA.changelog.histories[i].created);
+            let tmpListBefore = DATA.changelog.histories[i].items[j].fromString;
+            let tmpListAfter = DATA.changelog.histories[i].items[j].toString;    
+            
+            CUSTOM_FIELDS_IN_TIMES[GTOLA.CUSTOMFIELD_PREFIX + tmpListBefore]="";
+            CUSTOM_FIELDS_IN_TIMES[GTOLA.CUSTOMFIELD_PREFIX + tmpListAfter]="";
+            
+            TIMES[tmpCardId]['currentList']=tmpListAfter;     
+            if(TIMES[tmpCardId][tmpListBefore])
+              TIMES[tmpCardId][tmpListBefore]['time'] += (tmpDate-TIMES[tmpCardId][tmpListBefore]['from'])/metric;
+            if(!TIMES[tmpCardId][tmpListAfter])
+              TIMES[tmpCardId][tmpListAfter] = { time: 0};
+            TIMES[tmpCardId][tmpListAfter]['from'] = tmpDate;
+          }
+      }
+      
+      var timesCounter=0;
+      var keys = Object.keys(TIMES);
+      for(var i=0;i<keys.length;i++) {
+        var key = keys[i];
+        let now = new Date();
+        TIMES[key][ TIMES[key]['currentList'] ]['time']+=(now-TIMES[key][ TIMES[key]['currentList'] ]['from'])/metric;
+        timesCounter++;
+      }
+    }  
+  }
+};
+
+</script>
+</head>
+<body onload='GTOLA.loadProjects()'>
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PCCBB3S8"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+  
+  <div id="container" style="margin:5px;">   
+    <h1>Time In Status Reports Configuration<h1>
+    <h4>Select a project and hit Run to start calculating the durations. 
+    <br/>Custom fields will be created with names starting with the selected project key.
+    <br/>Do not close, move to another page, or refresh this browser page unless you want to cancel the operation.
+    <br/>If you Remove Duration Custom Fields, it will take some time for them to be removed from your projects as the operation is scheduled in the background
+    </h4>
+    <div id="projectSelectContainer" style="display: inline-block;"></div>
+    <button id="gtolaRunButton" style="display: inline-block;" class="aui-button aui-button-primary" onclick="GTOLA.main()">Run</button>
+    <button id="gtolaRemoveAll" style="display: inline-block;" class="aui-button aui-button-danger" onclick="GTOLA.removeAllCustomFields()">Remove Duration Custom Fields</button>
+    <p style="display: inline-block;" id="gtolaStatus"></p>
+    <br/>
+ 
+  </div>
+</body>
+</html>

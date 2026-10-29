@@ -1,0 +1,59 @@
+{
+   "name": "Issue Time in Status",
+   "description": "Measure the time each issue has been sitting in the current status. The add-on calculates even previous times the issue has been in the current status. If you click over the glance, you can see the time spent on other statuses.",
+   "key": "com.gtola.issue-time-in-status",
+   "baseUrl": "https://www.gtola.com",
+   "vendor": {
+       "name": "GTola",
+       "url": "https://www.gtola.com"
+   },
+   "authentication": {
+       "type": "none"
+   },
+   "lifecycle": {
+       "installed": "/.netlify/functions/install"
+   },
+   "version": "1.1",
+   "scopes": [ "READ", "WRITE" ],
+   "apiVersion": 1,
+   "links": {
+     "self": "https://www.gtola.com/issue-time-in-status/atlassian-connect.json",
+     "documentation": "https://www.gtola.com/issue-time-in-status/docs.html"
+   },
+   "modules": {
+"jiraIssueContexts": [
+        {
+          "icon": {
+            "width": 0,
+            "height": 0,
+            "url": "my_icon.svg"
+          },
+          "content": {
+            "type": "label",
+            "label": {
+              "value": "Duration"
+            }
+          },
+          "target": {
+            "type": "web_panel",
+            "url": "/issue-time-in-status/webpanel.html"
+          },
+          "jiraNativeAppsEnabled": true,
+          "name": {
+            "value": "Issue Time in Status"
+          },
+          "key": "gtola-status"
+        }
+      ],
+      "jiraBackgroundScripts": [
+      {
+        "url": "/issue-time-in-status/webpanel.html",
+        "location": {
+          "type": "issue_view",
+          "shouldReloadOnRefresh": true
+        },
+        "key": "my-issue-background-script"
+      }
+    ]
+   }
+}

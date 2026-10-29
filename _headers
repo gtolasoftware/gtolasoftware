@@ -1,0 +1,11 @@
+/card-time-in-list/*
+  Content-Security-Policy: script-src 'self' *.jquery.com *.cloudflare.com *.datatables.net *.profitwell.com *.paddle.com *.gtola.com *.trellocdn.com *.atl-paas.net *.googletagmanager.com *.google-analytics.com *.atlassian.net *.atl-paas.net 'unsafe-eval' 'unsafe-hashes' 'unsafe-inline'
+
+/card-time-in-list3/*
+  Content-Security-Policy: script-src 'self' *.jquery.com *.cloudflare.com *.datatables.net *.profitwell.com *.paddle.com *.gtola.com *.trellocdn.com *.atl-paas.net *.googletagmanager.com *.google-analytics.com *.atlassian.net *.atl-paas.net 'unsafe-eval' 'unsafe-hashes' 'unsafe-inline'
+
+/card-age/*
+  Content-Security-Policy: script-src 'self' *.gtola.com *.trellocdn.com *.atl-paas.net *.googletagmanager.com *.google-analytics.com *.atlassian.net *.atl-paas.net 'unsafe-eval' 'unsafe-hashes' 'unsafe-inline'
+  
+/task-time-in-status/*
+  Content-Security-Policy: script-src 'self' *.jsdelivr.net *.monday.com *.profitwell.com *.paddle.com *.gtola.com *.trellocdn.com *.atl-paas.net *.googletagmanager.com *.google-analytics.com *.atlassian.net *.atl-paas.net 'unsafe-eval' 'unsafe-hashes' 'unsafe-inline'

@@ -1,0 +1,16 @@
+---
+layout: main
+title: GTOLA - Blog posts that will make your Trello and Jira reporting and time-tracking easy
+desc: Our blog aims to improve your team productivity with simple and visual reporting
+---
+<h1>These posts will help you and your team be more productive. They make it easy to report and track time in Trello and Jira</h1>
+{% for post in site.posts %}
+<div class="blogi">
+	<div class="blogThumb"><a href="{{ post.url }}"><img alt="{{ post.title }}" src="{{ post.thumb }}"></a></div>
+  <div class="blogItem">
+    <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
+    <p>{{ post.desc  }}</p>
+  </div>
+  <div class="clear"></div>
+</div>
+{% endfor %}

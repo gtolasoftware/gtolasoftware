@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TBGZM58SHG"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TBGZM58SHG');
+</script>
+<script src="https://connect-cdn.atl-paas.net/all.js" crossorigin="anonymous" ></script>
+<script>
+function GT() {
+window.AP.theming.initializeTheming();
+
+let CONSTS = { DECIMALPLACES:2,UNIT_OF_MEASURE:'h',PAGESIZE:100, UNIT:'unit',UNIT_HOURS:'hours',UNIT_DAYS:'days',UNIT_MINUTES:'minutes', VERBOSITY:1 };
+let SETTINGS = {};
+SETTINGS[CONSTS.UNIT]=CONSTS.UNIT_HOURS; 
+let TIMES = {};
+let DATA = {};
+let PREV_ISSUE=null;
+
+function log(text) {
+  if(CONSTS.VERBOSITY>0)
+    console.log((new Date().toISOString())+" GTOLALOG "+text);
+}
+
+function calculate() {
+  if(TIMES)
+    delete TIMES;
+  TIMES = {};
+  
+  let metric = 1000 * 60 * 60;
+  if(SETTINGS[CONSTS.UNIT]===CONSTS.UNIT_HOURS)
+     metric = 1000 * 60 * 60;
+  else if(SETTINGS[CONSTS.UNIT]===CONSTS.UNIT_DAYS)
+    metric = 1000 * 60 * 60 * 24;
+  else if(SETTINGS[CONSTS.UNIT]===CONSTS.UNIT_MINUTES)
+    metric = 1000 * 60;
+  
+  let tmpDate = new Date(DATA.fields.created);
+  let tmpCardId = DATA.key;
+  //let tmpList = DATA.transitions[0].name;
+  
+  for(var i=0;i<DATA.transitions.length;i++)
+    log("TRANSITION: "+JSON.stringify(DATA.transitions[i]));
+    
+  for(var i=0;i<DATA.changelog.histories.length;i++)
+    log("CHANGELOG: "+JSON.stringify(DATA.changelog.histories[i]));
+  
+  let tmpList = DATA.changelog.histories.length === 0 ? DATA.fields.status.name : DATA.transitions[0].name;
+  let tmpDone=false;
+  for(let i=0;i<DATA.changelog.histories.length;i++) {
+    for(let j=0;j<DATA.changelog.histories[i].items.length;j++) {
+      if(DATA.changelog.histories[i].items[j].field==="status") {
+        tmpList = DATA.changelog.histories[i].items[j].fromString;
+        tmpDone=true;
+        break;
+      }
+    }
+    if(tmpDone)
+      break;
+  }
+  if(!tmpDone)
+    tmpList=DATA.fields.status.name;
+
+  //debugger;
+  
+  let startFrom = DATA.changelog.histories.length-1;
+  let moved = false;
+  let prevStatusAfterMove=null;
+  for(let i=0;i<DATA.changelog.histories.length && !moved;i++) {
+    for(let j=0;j<DATA.changelog.histories[i].items.length;j++) {
+      if(DATA.changelog.histories[i].items[j].field==="status") {
+        prevStatusAfterMove = DATA.changelog.histories[i].items[j].fromString;
+      } else if(DATA.changelog.histories[i].items[j].field==="project") {
+        tmpList=prevStatusAfterMove ? prevStatusAfterMove : DATA.fields.status.name;
+        tmpDate= new Date(DATA.changelog.histories[i].created);
+        startFrom = i;
+        moved=true;
+        break;
+      }
+    }
+  }
+  
+  
+  
+  TIMES[tmpCardId] = {};
+  TIMES[tmpCardId]['currentList']=tmpList;
+  TIMES[tmpCardId][tmpList] = {};
+  TIMES[tmpCardId][tmpList]['from']=tmpDate;
+  TIMES[tmpCardId][tmpList]['time']=0;
+  
+  for(let i=startFrom; i>=0; i--) {  
+    for(let j=0;j<DATA.changelog.histories[i].items.length;j++)
+      if(DATA.changelog.histories[i].items[j].field==="status") {
+        tmpDate = new Date(DATA.changelog.histories[i].created);
+        let tmpListBefore = DATA.changelog.histories[i].items[j].fromString;
+        let tmpListAfter = DATA.changelog.histories[i].items[j].toString;    
+        TIMES[tmpCardId]['currentList']=tmpListAfter;     
+        if(TIMES[tmpCardId][tmpListBefore])
+          TIMES[tmpCardId][tmpListBefore]['time'] += (tmpDate-TIMES[tmpCardId][tmpListBefore]['from'])/metric;
+        if(!TIMES[tmpCardId][tmpListAfter])
+          TIMES[tmpCardId][tmpListAfter] = { time: 0};
+        TIMES[tmpCardId][tmpListAfter]['from'] = tmpDate;
+      }
+  }
+  
+  Object.keys(TIMES).forEach(function (key) {
+    let now = new Date();
+    TIMES[key][ TIMES[key]['currentList'] ]['time']+=(now-TIMES[key][ TIMES[key]['currentList'] ]['from'])/metric;
+  });
+}
+
+function prettyTime(tmpTotal) {
+  var tmpDays = Math.floor(tmpTotal/24);
+  var tmpHours = Math.round(tmpTotal-tmpDays*24);
+  var tmpResult = tmpDays+'d'+tmpHours+'h';//TIMES[DATA.key][key]['time'].toFixed(CONSTS.DECIMALPLACES)+CONSTS.UNIT_OF_MEASURE;
+  return tmpResult;
+}
+
+function paginate(inUrl,startAt) {
+  let url = inUrl+(inUrl.includes('?') ? '&' : '?')+'maxResults='+CONSTS.PAGESIZE+'&startAt='+startAt; 
+  log("GET: "+url);
+  AP.request({
+    url: url,
+    type: 'GET',
+    success: function(responseText){
+      log("RESPONSE: "+responseText);
+      DATA = JSON.parse(responseText);
+      calculate();
+      var element = document.getElementById("gtolaResult");
+      let gtTime = prettyTime(TIMES[DATA.key][ TIMES[DATA.key]['currentList']]['time']);//TIMES[DATA.key][ TIMES[DATA.key]['currentList'] ]['time'].toFixed(CONSTS.DECIMALPLACES)+CONSTS.UNIT_OF_MEASURE;
+      
+      if(element)
+        Object.keys(TIMES[DATA.key]).forEach(function (key) {
+          if(key!=='currentList' && key!=='null') {
+            var tmpResult=prettyTime(TIMES[DATA.key][key]['time']);
+            element.innerHTML+='<tr><td><h4>'+key+'</h4></td><td><span class="aui-lozenge">'+tmpResult+'</span></td></tr>';
+          }
+        });
+      log("TIMES: "+element.innerHTML);
+      
+      var putUrl="/rest/api/2/issue/"+DATA.key+"/properties/com.atlassian.jira.issue:com.gtola.issue-time-in-status:gtola-status:status";
+      log("PUT: "+putUrl);
+      AP.request({
+        url: putUrl,
+        type: 'PUT',
+        data: JSON.stringify({ type: 'lozenge', value: { label: gtTime, type: 'default' } }), 
+        contentType: 'application/json',
+        headers: { Accept: 'application/json' },
+        success: function(responseText){            
+          if(document.cookie.indexOf('key'+DATA.id+'=')===-1){
+            AP.jira.refreshIssuePage();
+            var date = new Date();
+            date.setTime(date.getTime()+(1*60*1000));
+            document.cookie = "key"+DATA.id+"=true; expires="+date.toGMTString()+"; SameSite=None; Secure";
+          }        
+        },
+        error: function(xhr, statusText, errorThrown){
+          console.log("Error while updating glance: "+arguments);
+        }
+      });
+    },
+    error: function(xhr, statusText, errorThrown){
+      console.log("Error while getting issue details: "+arguments);
+    }
+  });
+}
+
+AP.context.getContext(function(response){
+  if(PREV_ISSUE!==response.jira.issue.key) {
+    paginate("/rest/api/2/issue/"+response.jira.issue.key+"?fields=key,project,status,created&expand=transitions,changelog",0);
+    PREV_ISSUE=response.jira.issue.key;
+  }
+});
+
+
+
+}
+</script>
+<link rel="stylesheet" type="text/css" href="https://unpkg.com/@atlassian/aui@9.6.0/dist/aui/aui-prototyping.css"/>
+<style>
+  body {  background-color: var(--jwm-background-surface); }
+  table { border: none;  }
+  table h4 { margin-right: 5px; color: var(--ds-text); }
+  #feedback { float: right; display:block; }
+  .clear { clear:both; }
+</style>
+
+</head>
+<body onload="GT()" >
+      <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PCCBB3S8"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript)  <a href="https://forms.gle/vsZSLSKUidVXzCSEA" id="feedback">Feedback2</a> -->
+<table id="gtolaResult"></table>
+<br/>
+<div class="clear"></div>
+
+      <div id="forge-feedback"></div>
+    <script src="feeedbackviagtag.js"></script>
+</body>
+</html>
