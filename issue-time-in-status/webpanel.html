@@ -15,6 +15,7 @@
 <script src="https://connect-cdn.atl-paas.net/all.js" crossorigin="anonymous" ></script>
 <script>
 function GT() {
+debugger;
 window.AP.theming.initializeTheming();
 
 let CONSTS = { DECIMALPLACES:2,UNIT_OF_MEASURE:'h',PAGESIZE:100, UNIT:'unit',UNIT_HOURS:'hours',UNIT_DAYS:'days',UNIT_MINUTES:'minutes', VERBOSITY:1 };
@@ -194,15 +195,11 @@ AP.context.getContext(function(response){
 
 </head>
 <body onload="GT()" >
-      <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PCCBB3S8"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript)  <a href="https://forms.gle/vsZSLSKUidVXzCSEA" id="feedback">Feedback2</a> -->
-<table id="gtolaResult"></table>
-<br/>
-<div class="clear"></div>
+    <table id="gtolaResult"></table>
+    <br/>
+    <div class="clear"></div>
 
-      <div id="forge-feedback"></div>
+    <div id="forge-feedback"></div>
     <script src="feeedbackviagtag.js"></script>
 </body>
 </html>
