@@ -156,7 +156,7 @@ function paginate(inUrl,startAt) {
         headers: { Accept: 'application/json' },
         success: function(responseText){            
           if(document.cookie.indexOf('key'+DATA.id+'=')===-1){
-            AP.jira.refreshIssuePage();
+            //AP.jira.refreshIssuePage();
             var date = new Date();
             date.setTime(date.getTime()+(1*60*1000));
             document.cookie = "key"+DATA.id+"=true; expires="+date.toGMTString()+"; SameSite=None; Secure";
